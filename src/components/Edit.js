@@ -6,21 +6,22 @@ export default class Edit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          file: '',
-          imagePreviewUrl: '',
-          text: '',
+            order: this.props.order,
+            file: '',
+            imagePreviewUrl: '',
+            text: '',
         };
         this._handleImageChange = this._handleImageChange.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
       }
     
-      _handleSubmit(e) {
+    _handleSubmit(e) {
         e.preventDefault();
         // TODO: do something with -> this.state.file
-        this.props.handleImageChange(this.state.imagePreviewUrl);
-      }
+        this.props.handleImageChange(this.state.order, this.state.imagePreviewUrl);
+    }
     
-      _handleImageChange(e) {
+    _handleImageChange(e) {
         e.preventDefault();
     
         let reader = new FileReader();
@@ -34,16 +35,16 @@ export default class Edit extends Component {
         }
     
         reader.readAsDataURL(file)
-      }
+    }
 
-      _handleTextChange(e) {
+    _handleTextChange(e) {
         e.preventDefault();
 
         this.setState({
             text: e.target.value,
         });
-        this.props.handleTextChange(this.state.text);
-      }
+        this.props.handleTextChange(this.state.order, this.state.text);
+    }
 
     render() {
         let {imagePreviewUrl} = this.state;
@@ -57,13 +58,13 @@ export default class Edit extends Component {
         return(
             <EditContainer>
                 <EditText>
-                    <p>Text1</p>
+                    <p>Text{this.state.order}</p>
                     <InputText
                         type="text"
                         onChange={(e)=>this._handleTextChange(e)} />
                 </EditText>
                 <EditImage>
-                    <label>Image1</label>
+                    <label>Image{this.state.order}</label>
                     <PreviewComponent>
                         <form onSubmit={(e)=>this._handleSubmit(e)}>
                             <FileInput 
