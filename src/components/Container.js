@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-web-animation';
-<<<<<<< HEAD
-import { Animatable, AnimationSequence } from 'react-web-animation';
-import Edit from './Edit';
 import styled from 'styled-components';
-=======
+import Edit from './Edit';
 import { AnimationGroup, Animatable, AnimationSequence } from 'react-web-animation';
-import Edit from './Edit';
-import styled from 'styled-components';
-import { switchCase } from '@babel/types';
->>>>>>> 57c45f8f80fb3a6f9c622e9e118373506fa0a871
 
 export default class Container extends Component {
 
@@ -67,11 +60,8 @@ export default class Container extends Component {
             duration,
             easing: 'ease-in-out',
             delay: 0,
-<<<<<<< HEAD
             iteractions: 2,
-=======
             iteractions: Infinity,
->>>>>>> 57c45f8f80fb3a6f9c622e9e118373506fa0a871
             direction: 'alternate',
             fill: 'forwards',
         };
@@ -165,54 +155,46 @@ export default class Container extends Component {
         return(
             <Wrapper>
                 <Displayer>
-                <AnimationView>
-                    <AnimationSequence
-                        onFinish={this.handlePause}
-                        playstate={this.state.playState} 
-                        currenttime={this.state.currentTime} >
-                        <Animatable 
-                            id="1" 
-                            keyframes={this.getKeyFramesFirst()} 
-<<<<<<< HEAD
-                            timing={this.getTiming(20000)} 
-=======
-                            timing={this.getTiming(2000)} 
->>>>>>> 57c45f8f80fb3a6f9c622e9e118373506fa0a871
-                            onloadend = {this.handlePause}>
-                            <FirstView  style={{width: '350px', height: `300px`}}>
-                                <TextFirst>{this.state.textFirst}</TextFirst>
-                                <ImgFirst src={this.state.imageURLFirst} />
-                            </FirstView>
-                        </Animatable>
-                        <Animatable 
-                            id="2" 
-                            keyframes={this.getKeyFramesSecond()} 
-                            timing={this.getTiming(6000)}>
-                            <SecondView>
-                                <TextSecond>{this.state.textSecond}</TextSecond>
-                                <ImgSecond src={this.state.imageURLSecond} />
-                            </SecondView>
-                        </Animatable>
-                        <Animatable 
-                            id="3" 
-                            keyframes={this.getKeyFramesThird()} 
-<<<<<<< HEAD
-                            timing={this.getTiming(20000)}>
-=======
-                            timing={this.getTiming(2000)}>
->>>>>>> 57c45f8f80fb3a6f9c622e9e118373506fa0a871
-                            <ThirdView>
-                                <ImgThird src={this.state.imageURLThird} />
-                                <TextThird>{this.state.textThird}</TextThird>
-                            </ThirdView>
-                        </Animatable>
-                    </AnimationSequence>
-                </AnimationView>
-                <Controller>
-                    <Range type="range" min="0" max="100" />
-                    <Button>&#9616;&#9616;</Button>
-                    <Button>2x</Button>
-                </Controller>
+                    <AnimationView>
+                        <AnimationSequence
+                            onFinish={this.handlePause}
+                            playstate={this.state.playState} 
+                            currenttime={this.state.currentTime} >
+                            <Animatable 
+                                id="1" 
+                                keyframes={this.getKeyFramesFirst()} 
+                                timing={this.getTiming(20000)} 
+                                onloadend = {this.handlePause}>
+                                <FirstView  style={{width: '350px', height: `300px`}}>
+                                    <TextFirst>{this.state.textFirst}</TextFirst>
+                                    <ImgFirst src={this.state.imageURLFirst} />
+                                </FirstView>
+                            </Animatable>
+                            <Animatable 
+                                id="2" 
+                                keyframes={this.getKeyFramesSecond()} 
+                                timing={this.getTiming(6000)}>
+                                <SecondView>
+                                    <TextSecond>{this.state.textSecond}</TextSecond>
+                                    <ImgSecond src={this.state.imageURLSecond} />
+                                </SecondView>
+                            </Animatable>
+                            <Animatable 
+                                id="3" 
+                                keyframes={this.getKeyFramesThird()} 
+                                timing={this.getTiming(20000)}>
+                                <ThirdView>
+                                    <ImgThird src={this.state.imageURLThird} />
+                                    <TextThird>{this.state.textThird}</TextThird>
+                                </ThirdView>
+                            </Animatable>
+                        </AnimationSequence>
+                    </AnimationView>
+                    <Controller>
+                        <Range type="range" min="0" max="100" />
+                        <Button>&#9616;&#9616;</Button>
+                        <Button>2x</Button>
+                    </Controller>
                 </Displayer>  
                 <Edit
                     order={1} 
