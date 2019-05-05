@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Animated } from 'react-web-animation';
+<<<<<<< HEAD
 import { Animatable, AnimationSequence } from 'react-web-animation';
 import Edit from './Edit';
 import styled from 'styled-components';
+=======
+import { AnimationGroup, Animatable, AnimationSequence } from 'react-web-animation';
+import Edit from './Edit';
+import styled from 'styled-components';
+import { switchCase } from '@babel/types';
+>>>>>>> 57c45f8f80fb3a6f9c622e9e118373506fa0a871
 
 export default class Container extends Component {
 
@@ -60,7 +67,11 @@ export default class Container extends Component {
             duration,
             easing: 'ease-in-out',
             delay: 0,
+<<<<<<< HEAD
             iteractions: 2,
+=======
+            iteractions: Infinity,
+>>>>>>> 57c45f8f80fb3a6f9c622e9e118373506fa0a871
             direction: 'alternate',
             fill: 'forwards',
         };
@@ -162,7 +173,11 @@ export default class Container extends Component {
                         <Animatable 
                             id="1" 
                             keyframes={this.getKeyFramesFirst()} 
+<<<<<<< HEAD
                             timing={this.getTiming(20000)} 
+=======
+                            timing={this.getTiming(2000)} 
+>>>>>>> 57c45f8f80fb3a6f9c622e9e118373506fa0a871
                             onloadend = {this.handlePause}>
                             <FirstView  style={{width: '350px', height: `300px`}}>
                                 <TextFirst>{this.state.textFirst}</TextFirst>
@@ -181,7 +196,11 @@ export default class Container extends Component {
                         <Animatable 
                             id="3" 
                             keyframes={this.getKeyFramesThird()} 
+<<<<<<< HEAD
                             timing={this.getTiming(20000)}>
+=======
+                            timing={this.getTiming(2000)}>
+>>>>>>> 57c45f8f80fb3a6f9c622e9e118373506fa0a871
                             <ThirdView>
                                 <ImgThird src={this.state.imageURLThird} />
                                 <TextThird>{this.state.textThird}</TextThird>
