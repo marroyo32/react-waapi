@@ -61,7 +61,6 @@ export default class Container extends Component {
             easing: 'ease-in-out',
             delay: 0,
             iteractions: 2,
-            iteractions: Infinity,
             direction: 'alternate',
             fill: 'forwards',
         };
@@ -163,7 +162,7 @@ export default class Container extends Component {
                             <Animatable 
                                 id="1" 
                                 keyframes={this.getKeyFramesFirst()} 
-                                timing={this.getTiming(20000)} 
+                                timing={this.getTiming(2000)} 
                                 onloadend = {this.handlePause}>
                                 <FirstView  style={{width: '350px', height: `300px`}}>
                                     <TextFirst>{this.state.textFirst}</TextFirst>
@@ -182,7 +181,7 @@ export default class Container extends Component {
                             <Animatable 
                                 id="3" 
                                 keyframes={this.getKeyFramesThird()} 
-                                timing={this.getTiming(20000)}>
+                                timing={this.getTiming(2000)}>
                                 <ThirdView>
                                     <ImgThird src={this.state.imageURLThird} />
                                     <TextThird>{this.state.textThird}</TextThird>
