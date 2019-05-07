@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { Animated } from 'react-web-animation';
 import styled from 'styled-components';
 import Edit from './Edit';
+<<<<<<< HEAD
 import Animation from './Animation';
 import { AnimationGroup, Animatable, AnimationSequence } from 'react-web-animation';
 
 class Container extends Component {
     
+=======
+import { AnimationGroup, Animatable, AnimationSequence } from 'react-web-animation';
+
+class Container extends Component {
+
+>>>>>>> 135b6f40d60f0065a1be6f2a89405ae021769d59
     constructor(props) {
         super(props);
 
@@ -29,8 +36,11 @@ class Container extends Component {
         };
         this.canvas = React.createRef();
         this.imageFirst = React.createRef();
+<<<<<<< HEAD
         this.imageSecond = React.createRef();
         this.imageThird = React.createRef();
+=======
+>>>>>>> 135b6f40d60f0065a1be6f2a89405ae021769d59
     }
 
     getKeyFramesFirst() {
@@ -156,6 +166,7 @@ class Container extends Component {
     //     xhr.send();
     // }
 
+<<<<<<< HEAD
     // componentDidMount () {
     //     this.drawAnimation();
     // }
@@ -197,12 +208,65 @@ class Container extends Component {
     //     // }
     // }
 
+=======
+    componentDidMount () {
+        const canvas = this.canvas.current;
+        console.log(canvas);
+        const ctx = canvas.getContext("2d");
+        const imgFirst = this.imageFirst.current;
+
+        imgFirst.onload = () => {
+            ctx.drawImage(imgFirst, 0, 50);
+            ctx.font = "20px Courier";
+            ctx.fillText(this.state.textFirst, 10, 15);
+        }
+    }
+>>>>>>> 135b6f40d60f0065a1be6f2a89405ae021769d59
 
     render() {   
         return(
             <Wrapper>
                 <Displayer>
+<<<<<<< HEAD
                     <Animation state = {this.state} />
+=======
+                    <AnimationView ref={this.canvas}>
+                    <ImgFirst src={this.state.imageURLFirst} ref={this.imageFirst} />
+                        {/* <AnimationSequence
+                            onFinish={this.handlePause}
+                            playstate={this.state.playState} 
+                            currenttime={this.state.currentTime} >
+                            <Animatable 
+                                id="1" 
+                                keyframes={this.getKeyFramesFirst()} 
+                                timing={this.getTiming(2000)} 
+                                onloadend = {this.handlePause}>
+                                <FirstView  style={{width: '350px', height: `300px`}}>
+                                    <TextFirst>{this.state.textFirst}</TextFirst>
+                                    <ImgFirst src={this.state.imageURLFirst} />
+                                </FirstView>
+                            </Animatable>
+                            <Animatable 
+                                id="2" 
+                                keyframes={this.getKeyFramesSecond()} 
+                                timing={this.getTiming(6000)}>
+                                <SecondView>
+                                    <TextSecond>{this.state.textSecond}</TextSecond>
+                                    <ImgSecond src={this.state.imageURLSecond} />
+                                </SecondView>
+                            </Animatable>
+                            <Animatable 
+                                id="3" 
+                                keyframes={this.getKeyFramesThird()} 
+                                timing={this.getTiming(2000)}>
+                                <ThirdView>
+                                    <ImgThird src={this.state.imageURLThird} />
+                                    <TextThird>{this.state.textThird}</TextThird>
+                                </ThirdView>
+                            </Animatable>
+                        </AnimationSequence> */}
+                    </AnimationView>
+>>>>>>> 135b6f40d60f0065a1be6f2a89405ae021769d59
                     <Controller>
                         <Range type="range" min="0" max="100" />
                         <Button>&#9616;&#9616;</Button>
@@ -237,6 +301,81 @@ const Displayer = styled.div`
     display: inline-block;
 `;
 
+<<<<<<< HEAD
+=======
+const AnimationView = styled.canvas`
+    width: 350px;
+    height: 500px;
+    float: left;
+    margin: 4%;
+    margin-top: 20%;
+    border: 2px solid #000;
+`;
+
+const FirstView = styled.div`
+    width: 350px;
+    height: 300px;
+`;
+
+const SecondView = styled.div`
+    margin-top: 250px;
+`;
+
+const ThirdView = styled.div`
+`;
+
+const TextFirst = styled.p`
+    text-align: center;
+    margin-top: 100px;
+    height: 40px;
+    font-size: 30px;
+    font-weight: bold;
+`;
+
+const TextSecond = styled.p`
+    text-align: center;
+    margin-top: 20px;
+    height: 100px;
+    font-size: 30px;
+    font-weight: bold;
+`;
+
+const TextThird = styled.p`
+    text-align: center;
+    margin-top: 20px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+`;
+
+const ImgFirst = styled.img`
+    width: 350px;
+    height: 300px;
+    display: none;
+`;
+
+const ImgSecond = styled.img`
+    width: 100%;
+    height: 300px;
+    margin-top: 10px;
+`;
+
+const ImgThird = styled.img`
+    width: 100%;
+    height: 300px;
+    margin-top: 90px;
+`;
+
+const Blank = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    width: 80px;
+    height: 50px;
+`;
+
+>>>>>>> 135b6f40d60f0065a1be6f2a89405ae021769d59
 const Controller = styled.div`
     width: 23rem;
     display: inline-block;
