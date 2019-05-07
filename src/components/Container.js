@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Animated } from 'react-web-animation';
 import styled from 'styled-components';
 import Edit from './Edit';
+import Animation from './Animation';
 import { AnimationGroup, Animatable, AnimationSequence } from 'react-web-animation';
 
 class Container extends Component {
-
+    
     constructor(props) {
         super(props);
 
@@ -28,6 +29,8 @@ class Container extends Component {
         };
         this.canvas = React.createRef();
         this.imageFirst = React.createRef();
+        this.imageSecond = React.createRef();
+        this.imageThird = React.createRef();
     }
 
     getKeyFramesFirst() {
@@ -100,6 +103,7 @@ class Container extends Component {
     }
 
     handleImageChange = ( order, imageURL ) => {
+        console.log(`hello`);
         switch(order) {
             case 1:
                 this.setState({
@@ -152,59 +156,53 @@ class Container extends Component {
     //     xhr.send();
     // }
 
-    componentDidMount () {
-        const canvas = this.canvas.current;
-        console.log(canvas);
-        const ctx = canvas.getContext("2d");
-        const imgFirst = this.imageFirst.current;
+    // componentDidMount () {
+    //     this.drawAnimation();
+    // }
 
-        imgFirst.onload = () => {
-            ctx.drawImage(imgFirst, 0, 50);
-            ctx.font = "20px Courier";
-            ctx.fillText(this.state.textFirst, 10, 15);
-        }
-    }
+    // drawAnimation () {
+    //     const canvas = this.canvas.current;
+    //     console.log(canvas);
+    //     const ctx = canvas.getContext("2d");
+    //     const imgFirst = this.imageFirst.current;
+    //     const imgSecond = this.imageSecond.current; 
+    //     const imgThird = this.imageThird.current;
+    //     // ctx.save();
+    //     // ctx.beginPath();
+    //     // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //     // ctx.translate(canvas.width / 4, canvas.height / 4);
+    //     // ctx.rotate((canvas.angle * Math.PI) / 180);
+
+    //     imgFirst.onload = () => {
+    //         console.log('h');
+    //         ctx.save();
+    //         ctx.beginPath();
+    //         ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //         ctx.translate(canvas.width / 4, 0);
+    //         ctx.drawImage(imgFirst, 0, 150, 350, 300);
+    //         ctx.font = "20px sans-serif";
+    //         ctx.fillText(this.state.textFirst, 10, 50);
+    //     }
+    //     // imgSecond.onload = () => {
+    //     //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //     //     ctx.drawImage(imgSecond, 0, 200, 350, 300);
+    //     //     ctx.font = "20px Courier";
+    //     //     ctx.fillText(this.state.textSecond, 10, 150);
+    //     // }
+    //     // imgThird.onload = () => {
+    //     //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //     //     ctx.drawImage(imgThird, 0, 0, 350, 300);
+    //     //     ctx.font = "20px Courier";
+    //     //     ctx.fillText(this.state.textThird, 10, 350);
+    //     // }
+    // }
+
 
     render() {   
         return(
             <Wrapper>
                 <Displayer>
-                    <AnimationView ref={this.canvas}>
-                    <ImgFirst src={this.state.imageURLFirst} ref={this.imageFirst} />
-                        {/* <AnimationSequence
-                            onFinish={this.handlePause}
-                            playstate={this.state.playState} 
-                            currenttime={this.state.currentTime} >
-                            <Animatable 
-                                id="1" 
-                                keyframes={this.getKeyFramesFirst()} 
-                                timing={this.getTiming(2000)} 
-                                onloadend = {this.handlePause}>
-                                <FirstView  style={{width: '350px', height: `300px`}}>
-                                    <TextFirst>{this.state.textFirst}</TextFirst>
-                                    <ImgFirst src={this.state.imageURLFirst} />
-                                </FirstView>
-                            </Animatable>
-                            <Animatable 
-                                id="2" 
-                                keyframes={this.getKeyFramesSecond()} 
-                                timing={this.getTiming(6000)}>
-                                <SecondView>
-                                    <TextSecond>{this.state.textSecond}</TextSecond>
-                                    <ImgSecond src={this.state.imageURLSecond} />
-                                </SecondView>
-                            </Animatable>
-                            <Animatable 
-                                id="3" 
-                                keyframes={this.getKeyFramesThird()} 
-                                timing={this.getTiming(2000)}>
-                                <ThirdView>
-                                    <ImgThird src={this.state.imageURLThird} />
-                                    <TextThird>{this.state.textThird}</TextThird>
-                                </ThirdView>
-                            </Animatable>
-                        </AnimationSequence> */}
-                    </AnimationView>
+                    <Animation state = {this.state} />
                     <Controller>
                         <Range type="range" min="0" max="100" />
                         <Button>&#9616;&#9616;</Button>
@@ -237,78 +235,6 @@ const Wrapper = styled.div`
 const Displayer = styled.div`
     width: 400px;
     display: inline-block;
-`;
-
-const AnimationView = styled.canvas`
-    width: 350px;
-    height: 500px;
-    float: left;
-    margin: 4%;
-    margin-top: 20%;
-    border: 2px solid #000;
-`;
-
-const FirstView = styled.div`
-    width: 350px;
-    height: 300px;
-`;
-
-const SecondView = styled.div`
-    margin-top: 250px;
-`;
-
-const ThirdView = styled.div`
-`;
-
-const TextFirst = styled.p`
-    text-align: center;
-    margin-top: 100px;
-    height: 40px;
-    font-size: 30px;
-    font-weight: bold;
-`;
-
-const TextSecond = styled.p`
-    text-align: center;
-    margin-top: 20px;
-    height: 100px;
-    font-size: 30px;
-    font-weight: bold;
-`;
-
-const TextThird = styled.p`
-    text-align: center;
-    margin-top: 20px;
-    height: 50px;
-    font-size: 30px;
-    font-weight: bold;
-`;
-
-const ImgFirst = styled.img`
-    width: 350px;
-    height: 300px;
-    display: none;
-`;
-
-const ImgSecond = styled.img`
-    width: 100%;
-    height: 300px;
-    margin-top: 10px;
-`;
-
-const ImgThird = styled.img`
-    width: 100%;
-    height: 300px;
-    margin-top: 90px;
-`;
-
-const Blank = styled.div`
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: white;
-    width: 80px;
-    height: 50px;
 `;
 
 const Controller = styled.div`
