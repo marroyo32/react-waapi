@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Canvas from './Canvas';
 
-class Animation extends React.Component {
+class Animation extends Component {
     constructor(props) {
         super(props);
         this.state = { 
@@ -10,9 +10,9 @@ class Animation extends React.Component {
         this.updateAnimationState = this.updateAnimationState.bind(this);
     }
     
-    componentDidMount() {
+    componentDidMount() {        
         this.rAF = requestAnimationFrame(this.updateAnimationState);
-        this.interval = setInterval(() => this.setState(prevState => ({ time: prevState.time + 1 })), 50);
+        this.interval = setInterval(() => this.setState(prevState => ({ time: prevState.time + 1 })), 20);
     }
     
     componentWillUnmount() {
@@ -22,6 +22,15 @@ class Animation extends React.Component {
 
     updateAnimationState() {
         this.rAF = requestAnimationFrame(this.updateAnimationState);
+        // if (this.props.state.paused) {
+        //     console.log(`paused`, this.state.time);
+        //     cancelAnimationFrame(this.rAF);
+        //     clearInterval(this.interval);
+        // } else {
+        //     console.log('play', this.state.time);
+        //     this.rAF = requestAnimationFrame(this.updateAnimationState);
+        //     this.interval = setInterval(() => this.setState(prevState => ({ time: prevState.time + 1 })), 1000);
+        // }
     }
     
     render() {

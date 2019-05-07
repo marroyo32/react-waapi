@@ -155,48 +155,6 @@ class Container extends Component {
     //     xhr.send();
     // }
 
-    // componentDidMount () {
-    //     this.drawAnimation();
-    // }
-
-    // drawAnimation () {
-    //     const canvas = this.canvas.current;
-    //     console.log(canvas);
-    //     const ctx = canvas.getContext("2d");
-    //     const imgFirst = this.imageFirst.current;
-    //     const imgSecond = this.imageSecond.current; 
-    //     const imgThird = this.imageThird.current;
-    //     // ctx.save();
-    //     // ctx.beginPath();
-    //     // ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //     // ctx.translate(canvas.width / 4, canvas.height / 4);
-    //     // ctx.rotate((canvas.angle * Math.PI) / 180);
-
-    //     imgFirst.onload = () => {
-    //         console.log('h');
-    //         ctx.save();
-    //         ctx.beginPath();
-    //         ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //         ctx.translate(canvas.width / 4, 0);
-    //         ctx.drawImage(imgFirst, 0, 150, 350, 300);
-    //         ctx.font = "20px sans-serif";
-    //         ctx.fillText(this.state.textFirst, 10, 50);
-    //     }
-    //     // imgSecond.onload = () => {
-    //     //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //     //     ctx.drawImage(imgSecond, 0, 200, 350, 300);
-    //     //     ctx.font = "20px Courier";
-    //     //     ctx.fillText(this.state.textSecond, 10, 150);
-    //     // }
-    //     // imgThird.onload = () => {
-    //     //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //     //     ctx.drawImage(imgThird, 0, 0, 350, 300);
-    //     //     ctx.font = "20px Courier";
-    //     //     ctx.fillText(this.state.textThird, 10, 350);
-    //     // }
-    // }
-
-
     render() {   
         return(
             <Wrapper>
@@ -204,8 +162,8 @@ class Container extends Component {
                     <Animation state = {this.state} />
                     <Controller>
                         <Range type="range" min="0" max="100" />
-                        <Button onClick = {()=> this.state.paused = !this.state.paused }>&#9616;&#9616;</Button>
-                        <Button>2x</Button>
+                        <Button onClick = {()=> this.setState({paused: false}) }>&#9654;</Button>
+                        <Button onClick = {()=> this.setState({paused: false}) }>&#9616;&#9616;</Button>
                     </Controller>
                 </Displayer>  
                 <Edit
@@ -258,7 +216,7 @@ const Button = styled.button`
     line-height: 1;
     margin: .5rem;
     text-align: center;
-    padding: .2rem .5rem .2rem .3rem;
+    padding: .2rem .4rem .2rem .4rem;
     border-radius: .3rem;
     transition: background .15s linear, color .15s linear;
     border: 1px solid #333;

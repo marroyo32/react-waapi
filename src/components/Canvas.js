@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-class Canvas extends React.Component {
+class Canvas extends Component {
     constructor(props) {
         super(props); 
         this.state = {
@@ -47,9 +47,9 @@ class Canvas extends React.Component {
         const imgFirst = this.imageFirst.current;
         const imgSecond = this.imageSecond.current; 
         const imgThird = this.imageThird.current;
-        // ctx.save();
+        ctx.save();
         ctx.beginPath();
-        // ctx.restore();
+        ctx.restore();
         if(time < 200) {
             ctx.clearRect(-350, 0, width, height);
             if (time < 50) {
@@ -62,14 +62,11 @@ class Canvas extends React.Component {
             ctx.drawImage(imgFirst, -343, 150, 350, 300);
             ctx.font = "20px sans-serif";
             this.wrapText(ctx, this.props.state.textFirst, -333, 80, 300, 20);
-        } else if (time == 200) {
-            console.log(`200`);
+        } else if (time === 200) {
             ctx.translate(-693, 0);
         } else if (200 < time && time < 800) {
-            console.log(`8000`,time);            
             ctx.clearRect(0, 500, width, height);
             if (time < 250) {
-                console.log(`less than 250`,time);
                 ctx.translate( 0, -10 );
             } else if(250 <= time && time < 750) {
                 ctx.translate( 0, 0 );
@@ -79,13 +76,11 @@ class Canvas extends React.Component {
             ctx.drawImage(imgSecond, 0, 690, 350, 300);
             ctx.font = "20px sans-serif";
             this.wrapText(ctx, this.props.state.textSecond, 10, 550, 300, 20);
-        } else if (time == 800) { 
+        } else if (time === 800) { 
             ctx.translate(0, 500);
         } else if (800 < time && time < 1000) {
-            console.log(`8000`,time);            
             ctx.clearRect(0, 0, width, height);
             if (time < 850) {
-                console.log(`less than 250`,time);
                 ctx.translate( 0, 10 );
             } else if(850 <= time && time < 950) {
                 ctx.translate( 0, 0 );
