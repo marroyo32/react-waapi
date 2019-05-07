@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Animated } from 'react-web-animation';
 import styled from 'styled-components';
 import Edit from './Edit';
 import Animation from './Animation';
-import { AnimationGroup, Animatable, AnimationSequence } from 'react-web-animation';
 
 class Container extends Component {
     
