@@ -3,7 +3,10 @@ import styled from 'styled-components';
 
 class Canvas extends React.Component {
     constructor(props) {
-        super(props);        
+        super(props); 
+        this.state = {
+            pause: false,
+        };       
         this.canvas = React.createRef();
         this.imageFirst = React.createRef();
         this.imageSecond = React.createRef();
@@ -11,6 +14,31 @@ class Canvas extends React.Component {
     }
     
     componentDidUpdate() {
+        this.drawAnimation();
+    }
+
+    wrapText(context, text, x, y, maxWidth, lineHeight) {
+        var words = text.split(' ');
+        var line = '';
+
+        for(var n = 0; n < words.length; n++) {
+          var testLine = line + words[n] + ' ';
+          var metrics = context.measureText(testLine);
+          var testWidth = metrics.width;
+          if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+          }
+          else {
+            line = testLine;
+          }
+        }
+        context.fillText(line, x, y);
+      }
+
+    drawAnimation() {
+        if(this.props.state.paused){return;}
         const {time} = this.props;
         const canvas = this.canvas.current;
         const ctx = canvas.getContext("2d");
@@ -21,23 +49,31 @@ class Canvas extends React.Component {
         const imgThird = this.imageThird.current;
         ctx.save();
         ctx.beginPath();
-        // ctx.clearRect(0, 0, width, height);
-        // ctx.translate(width/2, height/2 );
-        // ctx.rotate(time * Math.PI / 180);
-        // ctx.fillStyle = '#4397AC';
-        // ctx.fillRect(-width/4, -height/4, width/2, height/2);
         ctx.restore();
-        // imgFirst.onload = () => {
-        //     console.log('h');
-            // ctx.save();
-            // ctx.beginPath();
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.translate(0.1*time, 0 );
-            // ctx.rotate(time * Math.PI / 180);
+        if(time < 120) {
+            console.log(`2000`,time);
+            ctx.clearRect(0, 0, width, height);
+            ctx.translate(0.05*time, 0 );
             ctx.drawImage(imgFirst, 0, 150, 350, 300);
             ctx.font = "20px sans-serif";
-            ctx.fillText(this.props.state.textFirst, 10, 50);
-        // }
+            this.wrapText(ctx, this.props.state.textFirst, 10, 80, 300, 20);
+        } else if (120 <= time && time < 300) {
+            console.log(`8000`,time);
+            ctx.clearRect(0, 0, width, height);
+            // ctx.translate( 0, 0 );
+            ctx.translate(-0.05*time, 0 );
+            ctx.drawImage(imgSecond, 0, 200, 350, 300);
+            ctx.font = "20px sans-serif";
+            // ctx.fillText(this.props.state.textSecond, 10, 50, 300);
+            this.wrapText(ctx, this.props.state.textSecond, 10, 80, 300, 20);        
+        } else if (300 <= time && time < 500) {
+            console.log(``,time);
+            ctx.clearRect(0, 0, width, height);
+            ctx.translate(0.05*time, 0 );
+            ctx.drawImage(imgThird, 0, 150, 350, 300);
+            ctx.font = "20px sans-serif";
+            this.wrapText(ctx, this.props.state.textThird, 10, 80, 300, 20); 
+        }
     }
     
     render() {
