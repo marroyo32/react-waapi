@@ -12,14 +12,15 @@ class Animation extends React.Component {
     
     componentDidMount() {
         this.rAF = requestAnimationFrame(this.updateAnimationState);
+        this.interval = setInterval(() => this.setState(prevState => ({ time: prevState.time + 1 })), 50);
     }
     
     componentWillUnmount() {
         cancelAnimationFrame(this.rAF);
+        clearInterval(this.interval);
     }
-    
+
     updateAnimationState() {
-        this.setState(prevState => ({ time: prevState.time + 1 }));
         this.rAF = requestAnimationFrame(this.updateAnimationState);
     }
     
