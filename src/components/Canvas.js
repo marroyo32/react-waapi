@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios'
 
 class Canvas extends Component {
     constructor(props) {
@@ -39,6 +40,7 @@ class Canvas extends Component {
 
     drawAnimation() {
         if(this.props.state.paused){return;}
+
         const {time} = this.props;
         const canvas = this.canvas.current;
         const ctx = canvas.getContext("2d");
@@ -47,6 +49,7 @@ class Canvas extends Component {
         const imgFirst = this.imageFirst.current;
         const imgSecond = this.imageSecond.current; 
         const imgThird = this.imageThird.current;
+        let counter = time * 2;
         ctx.save();
         ctx.beginPath();
         ctx.restore();
@@ -92,7 +95,20 @@ class Canvas extends Component {
             this.wrapText(ctx, this.props.state.textThird, 10, 350, 300, 20);
         } else {
             return;
-        }
+        } 
+        // capture the data URL of the image
+        let data = canvas.toDataURL("image/png");
+        data = 'data=' + encodeURIComponent(data) + '&i=' + counter;
+        axios.post(
+            'http://localhost:8888/save_animation.php',
+            data,
+            { headers: {
+              'accept-language': 'en_US',
+              'content-type': 'application/x-www-form-urlencoded'
+            } }
+          ).then(response => {
+            console.log('Post data successfully!');
+          }).catch(error => console.log(error));
     }
     
     render() {
