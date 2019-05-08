@@ -12,7 +12,7 @@ class Animation extends Component {
     
     componentDidMount() {        
         this.rAF = requestAnimationFrame(this.updateAnimationState);
-        this.interval = setInterval(() => this.setState(prevState => ({ time: prevState.time + 1 })), 20);
+        this.interval = setInterval(() => this.setState(prevState => ({ time: prevState.time + 1 })), 10);
     }
     
     componentWillUnmount() {
