@@ -42,6 +42,7 @@ class Canvas extends Component {
         if(this.props.state.paused){return;}
 
         const {time} = this.props;
+        console.log(`time`, time);
         const canvas = this.canvas.current;
         const ctx = canvas.getContext("2d");
         const width = canvas.width;
@@ -108,6 +109,7 @@ class Canvas extends Component {
             } }
           ).then(response => {
             console.log('Post data successfully!');
+            console.log(response.data);
           }).catch(error => console.log(error));
     }
     
