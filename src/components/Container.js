@@ -73,6 +73,7 @@ class Container extends Component {
 
     handlePause = () => {        
         this.setState(({ paused }) => ({ paused: !paused }))
+        // this.props.handlePause()
     }
 
     __btnIcon = () => {
@@ -168,16 +169,9 @@ class Container extends Component {
             <Wrapper>
                 <Displayer>
                     <Animation state = {this.state} />
-                    <Controller>
-                        <Button onClick = { this.handlePause }>
-                            {
-                                this.__btnIcon()
-                            }
-                        </Button>
-                        <Range type="range" min="0" max="100" />
-                    </Controller>
                     <CreateButton>Create Movie</CreateButton>
                 </Displayer>  
+                
                 <Edit
                     order={1} 
                     handleTextChange = {this.handleTextChange} 
@@ -204,42 +198,6 @@ const Wrapper = styled.div`
 const Displayer = styled.div`
     width: 750px;
     display: inline-block;
-`;
-
-const Controller = styled.div`
-    width: 26rem;
-    margin-left: 13rem;
-    display: flex;
-`;
-
-const Range = styled.input`
-    width: 16rem;
-    display: inline-block;
-    margin: .5rem;
-    float: left;
-`;
-
-const Button = styled.button`
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    background: transparent;
-    border: none;
-    color: #333;
-    line-height: 1;
-    margin: .5rem;
-    text-align: center;
-    padding: .2rem .4rem .2rem .4rem;
-    border-radius: .3rem;
-    transition: background .15s linear, color .15s linear;
-    border: 1px solid #333;
-    float: left;
-    width: 35px;
-
-    &.active {
-    background: #333;
-    color: $light;
-    }
 `;
 
 const CreateButton = styled.button`

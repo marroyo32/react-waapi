@@ -39,8 +39,7 @@ class Canvas extends Component {
     }
 
     drawAnimation() {
-        if(this.props.state.paused){return;}
-
+        if(this.props.state.paused){return;}        
         const {time} = this.props;
         console.log(`time`, time);
         const canvas = this.canvas.current;
@@ -103,19 +102,19 @@ class Canvas extends Component {
             return;
         } 
         // capture the data URL of the image
-        let data = canvas.toDataURL("image/png");
-        data = 'data=' + encodeURIComponent(data) + '&i=' + counter;
-        axios.post(
-            'http://localhost:8888/save_animation.php',
-            data,
-            { headers: {
-              'accept-language': 'en_US',
-              'content-type': 'application/x-www-form-urlencoded'
-            } }
-          ).then(response => {
-            console.log('Post data successfully!');
-            console.log(response.data);
-          }).catch(error => console.log(error));
+        // let data = canvas.toDataURL("image/png");
+        // data = 'data=' + encodeURIComponent(data) + '&i=' + counter;
+        // axios.post(
+        //     'http://localhost:8888/save_animation.php',
+        //     data,
+        //     { headers: {
+        //       'accept-language': 'en_US',
+        //       'content-type': 'application/x-www-form-urlencoded'
+        //     } }
+        //   ).then(response => {
+        //     console.log('Post data successfully!');
+        //     console.log(response.data);
+        //   }).catch(error => console.log(error));
     }
     
     render() {
