@@ -98,8 +98,8 @@ class Canvas extends Component {
             ctx.drawImage(imgThird, 0, 0, imgThird.width * ratioThird, imgThird.height * ratioThird);
             ctx.font = "40px sans-serif";
             this.wrapText(ctx, this.props.state.textThird, 50, imgThird.height * ratioThird + 80, width*0.8, 40);
-        } else {
-            return;
+        } else if (time === 1000) {
+            ctx.translate(-velocityHorizon, -height);
         } 
         // capture the data URL of the image
         // let data = canvas.toDataURL("image/png");
