@@ -50,7 +50,7 @@ class Canvas extends Component {
         const imgFirst = this.imageFirst.current;
         const imgSecond = this.imageSecond.current; 
         const imgThird = this.imageThird.current;
-        let counter = time * 2;
+        let counter = time;
         ctx.save();
         ctx.beginPath();
         ctx.restore();
