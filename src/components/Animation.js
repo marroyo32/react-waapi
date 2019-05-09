@@ -10,12 +10,12 @@ class Animation extends Component {
             paused: true,
             pausedTime: 0,
         };
-    }
+    };
 
     handlePause = () => {        
         this.setState(({ paused }) => ({ paused: !paused }))
         // this.animate();
-    }
+    };
 
     __btnIcon = () => {
         if (this.state.paused) {
@@ -23,9 +23,9 @@ class Animation extends Component {
         } else {
             return <p style={{margin: '0'}}>&#9616;&#9616;</p> 
         }
-    }
+    };
     
-    componentDidMount() {        
+    componentWillMount() {        
         setInterval(() => {
             if (this.state.paused === false && this.state.time < 1000) {
                 this.setState(prevState => ({ 
@@ -37,9 +37,10 @@ class Animation extends Component {
                     paused: true,
                 })
             } }, 10);            
-    }
+    };
     
     render() {
+        console.log(`render`);
         return (
             <div>
                 <Canvas time={this.state.time} state={this.props.state} />
@@ -51,6 +52,7 @@ class Animation extends Component {
                     </Button>
                     <Range type="range" min="0" max="100" />
                 </Controller>
+                <CreateButton>Create Movie</CreateButton>
             </div>
         );
     }
@@ -93,4 +95,16 @@ const Button = styled.button`
     background: #333;
     color: $light;
     }
+`;
+
+const CreateButton = styled.button`
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    padding: .2rem;
+    margin: 1rem;
+    background-color: #fff;
+    font-size: 15px;
+    border-radius: 4px;
+    border: 1px solid black;
 `;
