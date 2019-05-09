@@ -57,19 +57,19 @@ class Canvas extends Component {
         ctx.restore();
         if(time < 200) {
             ctx.clearRect(-width, 0, width, height);
-            if (time < 50) {
+            if (0 <= time && time < 50) {
                 ctx.translate(velocityHorizon, 0 );
             } else if(50 <= time && time < 150) {
                 ctx.translate(0, 0 );
-            } else {
+            } else if (150 <= time && time < 200) {
                 ctx.translate(velocityHorizon, 0 );
             }
             const ratioFirst = width / imgFirst.width;
-            ctx.drawImage(imgFirst, -width + velocityHorizon, 500, imgFirst.width * ratioFirst, imgFirst.height * ratioFirst);
+            ctx.drawImage(imgFirst, -width, 500, imgFirst.width * ratioFirst, imgFirst.height * ratioFirst);
             ctx.font = "40px sans-serif";
             this.wrapText(ctx, this.props.state.textFirst, -555, 380, width*0.8, 35);
         } else if (time === 200) {
-            ctx.translate(-width*2 + velocityHorizon, 0);
+            ctx.translate(-width*2, 0);
         } else if (200 < time && time < 800) {
             ctx.clearRect(0, height, width, height*2);
             if (time < 250) {

@@ -169,7 +169,6 @@ class Container extends Component {
             <Wrapper>
                 <Displayer>
                     <Animation state = {this.state} />
-                    <CreateButton>Create Movie</CreateButton>
                 </Displayer>  
                 
                 <Edit
@@ -198,16 +197,4 @@ const Wrapper = styled.div`
 const Displayer = styled.div`
     width: 750px;
     display: inline-block;
-`;
-
-const CreateButton = styled.button`
-    width: 120px;
-    height: 40px;
-    text-align: center;
-    padding: .2rem;
-    margin: 1rem;
-    background-color: #fff;
-    font-size: 15px;
-    border-radius: 4px;
-    border: 1px solid black;
 `;
