@@ -8,13 +8,11 @@ class Animation extends Component {
         this.state = { 
             time: 0,
             paused: true,
-            pausedTime: 0,
         };
     };
 
     handlePause = () => {        
-        this.setState(({ paused }) => ({ paused: !paused }))
-        // this.animate();
+        this.setState(({ paused }) => ({ paused: !paused }));
     };
 
     __btnIcon = () => {
@@ -23,7 +21,7 @@ class Animation extends Component {
         } else {
             return <p style={{margin: '0'}}>&#9616;&#9616;</p> 
         }
-    };
+    }
     
     componentWillMount() {        
         setInterval(() => {
@@ -36,11 +34,11 @@ class Animation extends Component {
                     time: 0,
                     paused: true,
                 })
-            } }, 10);            
+            } 
+        }, 10);            
     };
     
     render() {
-        console.log(`render`);
         return (
             <div>
                 <Canvas time={this.state.time} state={this.props.state} />
