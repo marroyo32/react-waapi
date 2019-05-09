@@ -50,50 +50,55 @@ class Canvas extends Component {
         const imgFirst = this.imageFirst.current;
         const imgSecond = this.imageSecond.current; 
         const imgThird = this.imageThird.current;
+        const velocityHorizon = width/50;
+        const velocityVertical = height/50;
         let counter = time;
         ctx.save();
         ctx.beginPath();
         ctx.restore();
         if(time < 200) {
-            ctx.clearRect(-350, 0, width, height);
+            ctx.clearRect(-width, 0, width, height);
             if (time < 50) {
-                ctx.translate(7, 0 );
+                ctx.translate(velocityHorizon, 0 );
             } else if(50 <= time && time < 150) {
                 ctx.translate(0, 0 );
             } else {
-                ctx.translate(7, 0 );
+                ctx.translate(velocityHorizon, 0 );
             }
-            ctx.drawImage(imgFirst, -343, 150, 350, 300);
-            ctx.font = "20px sans-serif";
-            this.wrapText(ctx, this.props.state.textFirst, -333, 80, 300, 20);
+            const ratioFirst = width / imgFirst.width;
+            ctx.drawImage(imgFirst, -width + velocityHorizon, 500, imgFirst.width * ratioFirst, imgFirst.height * ratioFirst);
+            ctx.font = "40px sans-serif";
+            this.wrapText(ctx, this.props.state.textFirst, -555, 380, width*0.8, 35);
         } else if (time === 200) {
-            ctx.translate(-693, 0);
+            ctx.translate(-width*2 + velocityHorizon, 0);
         } else if (200 < time && time < 800) {
-            ctx.clearRect(0, 500, width, height);
+            ctx.clearRect(0, height, width, height*2);
             if (time < 250) {
-                ctx.translate( 0, -10 );
+                ctx.translate( 0, -velocityVertical );
             } else if(250 <= time && time < 750) {
                 ctx.translate( 0, 0 );
             } else {
-                ctx.translate( 0, -10 );
+                ctx.translate( 0, -velocityVertical );
             }
-            ctx.drawImage(imgSecond, 0, 690, 350, 300);
-            ctx.font = "20px sans-serif";
-            this.wrapText(ctx, this.props.state.textSecond, 10, 550, 300, 20);
+            const ratioSecond = width / imgSecond.width;
+            ctx.drawImage(imgSecond, 0, height*2 - imgSecond.height*1.5 - velocityVertical, imgSecond.width * ratioSecond, imgSecond.height * 1.5);
+            ctx.font = "40px sans-serif";
+            this.wrapText(ctx, this.props.state.textSecond, 50, height*2-imgSecond.height*1.5-350, width*0.8, 40);
         } else if (time === 800) { 
-            ctx.translate(0, 500);
+            ctx.translate(0, height);
         } else if (800 < time && time < 1000) {
             ctx.clearRect(0, 0, width, height);
             if (time < 850) {
-                ctx.translate( 0, 10 );
+                ctx.translate( 0, velocityVertical );
             } else if(850 <= time && time < 950) {
                 ctx.translate( 0, 0 );
             } else {
-                ctx.translate( 0, 10 );
+                ctx.translate( 0, velocityVertical );
             }
-            ctx.drawImage(imgThird, 0, 0, 350, 300);
-            ctx.font = "20px sans-serif";
-            this.wrapText(ctx, this.props.state.textThird, 10, 350, 300, 20);
+            const ratioThird = width/imgThird.width;
+            ctx.drawImage(imgThird, 0, 0, imgThird.width * ratioThird, imgThird.height * ratioThird);
+            ctx.font = "40px sans-serif";
+            this.wrapText(ctx, this.props.state.textThird, 50, imgThird.height * ratioThird + 80, width*0.8, 40);
         } else {
             return;
         } 
@@ -118,7 +123,7 @@ class Canvas extends Component {
         if(state) {
             return (
                 <div>
-                    <AnimationView ref={this.canvas} width={'350px'} height={'500px'} ></AnimationView>
+                    <AnimationView ref={this.canvas} width={'608px'} height={'1080px'} ></AnimationView>
                     <ImgFirst src={state.imageURLFirst} ref={this.imageFirst}/>
                     <ImgSecond src={state.imageURLSecond} ref={this.imageSecond}/>
                     <ImgThird src={state.imageURLThird} ref={this.imageThird}/>
