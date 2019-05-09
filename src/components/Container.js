@@ -25,6 +25,7 @@ class Container extends Component {
             `,
             animationState: 1,
             paused: false,
+            playButton: '',
         };
         this.canvas = React.createRef();
         this.imageFirst = React.createRef();
@@ -70,8 +71,16 @@ class Container extends Component {
         };
     }
 
-    handlePause = () => {
-        console.log('hello');
+    handlePause = () => {        
+        this.setState(({ paused }) => ({ paused: !paused }))
+    }
+
+    __btnIcon = () => {
+        if (this.state.paused) {
+            return <p style={{margin: '0'}}>&#9654;</p>   
+        } else {
+            return <p style={{margin: '0'}}>&#9616;&#9616;</p> 
+        }
     }
 
     handleTextChange = ( order, text ) => {
@@ -102,7 +111,6 @@ class Container extends Component {
     }
 
     handleImageChange = ( order, imageURL ) => {
-        console.log(`hello`);
         switch(order) {
             case 1:
                 this.setState({
@@ -161,10 +169,14 @@ class Container extends Component {
                 <Displayer>
                     <Animation state = {this.state} />
                     <Controller>
+                        <Button onClick = { this.handlePause }>
+                            {
+                                this.__btnIcon()
+                            }
+                        </Button>
                         <Range type="range" min="0" max="100" />
-                        <Button onClick = {()=> this.setState({paused: false}) }>&#9654;</Button>
-                        <Button onClick = {()=> this.setState({paused: false}) }>&#9616;&#9616;</Button>
                     </Controller>
+                    <CreateButton>Create Movie</CreateButton>
                 </Displayer>  
                 <Edit
                     order={1} 
@@ -190,20 +202,21 @@ const Wrapper = styled.div`
 `;
 
 const Displayer = styled.div`
-    width: 400px;
+    width: 750px;
     display: inline-block;
 `;
 
 const Controller = styled.div`
-    width: 23rem;
-    display: inline-block;
+    width: 26rem;
+    margin-left: 13rem;
+    display: flex;
 `;
 
 const Range = styled.input`
     width: 16rem;
     display: inline-block;
     margin: .5rem;
-    float: right;
+    float: left;
 `;
 
 const Button = styled.button`
@@ -221,9 +234,22 @@ const Button = styled.button`
     transition: background .15s linear, color .15s linear;
     border: 1px solid #333;
     float: left;
+    width: 35px;
 
     &.active {
     background: #333;
     color: $light;
     }
+`;
+
+const CreateButton = styled.button`
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    padding: .2rem;
+    margin: 1rem;
+    background-color: #fff;
+    font-size: 15px;
+    border-radius: 4px;
+    border: 1px solid black;
 `;
