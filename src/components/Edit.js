@@ -6,10 +6,10 @@ export default class Edit extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            order: this.props.order,
             file: '',
             imagePreviewUrl: '',
             text: '',
+            pageNumber: 1,
         };
         this._handleImageChange = this._handleImageChange.bind(this);
         this._handleSubmit = this._handleSubmit.bind(this);
@@ -18,7 +18,7 @@ export default class Edit extends Component {
     _handleSubmit(e) {
         e.preventDefault();
         // TODO: do something with -> this.state.file
-        this.props.handleImageChange(this.state.order, this.state.imagePreviewUrl);
+        this.props.handleImageChange(this.state.pageNumber, this.state.imagePreviewUrl);
     }
     
     _handleImageChange(e) {
@@ -43,7 +43,17 @@ export default class Edit extends Component {
         this.setState({
             text: e.target.value,
         });
-        this.props.handleTextChange(this.state.order, this.state.text);
+        this.props.handleTextChange(this.state.pageNumber, this.state.text);
+    }
+
+    _handlePage (e, pageNumber) {
+        e.preventDefault();
+        this.setState({
+            pageNumber: pageNumber,
+            file: '',
+            imagePreviewUrl: '',
+            text: '',
+        })
     }
 
     render() {
@@ -57,14 +67,19 @@ export default class Edit extends Component {
 
         return(
             <EditContainer>
+                <div style = {{display: 'flex'}}>
+                    <Segment onClick = {(e)=>this._handlePage(e, 1)}>Page 1</Segment>
+                    <Segment onClick = {(e)=>this._handlePage(e, 2)}>Page 2</Segment>
+                    <Segment onClick = {(e)=>this._handlePage(e, 3)}>Page 3</Segment>
+                </div>
                 <EditText>
-                    <p>Text{this.state.order}</p>
+                    <p>Text{this.state.pageNumber}</p>
                     <InputText
                         type="text"
                         onChange={(e)=>this._handleTextChange(e)} />
                 </EditText>
                 <EditImage>
-                    <label>Image{this.state.order}</label>
+                    <label>Image{this.state.pageNumber}</label>
                     <PreviewComponent>
                         <form onSubmit={(e)=>this._handleSubmit(e)}>
                             <FileInput 
@@ -86,7 +101,7 @@ export default class Edit extends Component {
 
 const EditContainer = styled.div`
     text-align: center;
-    width: 60%;
+    width: 40%;
     float: right;
     margin-top: 4%;
 `;
@@ -101,7 +116,7 @@ const EditImage = styled.div`
 `;
 
 const InputText = styled.textarea`
-    width: 80%;
+    width: 40%;
     height: 80px;
     font-size: 25px;
 `;
@@ -152,4 +167,17 @@ const SubmitButton = styled.button`
 
 const PreviewComponent = styled.div`
     
+`;
+
+const Segment = styled.button`
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    padding: .2rem;
+    margin: 1rem;
+    background-color: #fff;
+    font-size: 15px;
+    border-radius: 4px;
+    border: 1px solid black;
+    float: left;
 `;

@@ -169,18 +169,8 @@ class Container extends Component {
             <Wrapper>
                 <Displayer>
                     <Animation state = {this.state} />
-                </Displayer>  
-                
+                </Displayer> 
                 <Edit
-                    order={1} 
-                    handleTextChange = {this.handleTextChange} 
-                    handleImageChange = {this.handleImageChange} />
-                <Edit
-                    order={2}  
-                    handleTextChange = {this.handleTextChange} 
-                    handleImageChange = {this.handleImageChange} />
-                <Edit
-                    order={3}  
                     handleTextChange = {this.handleTextChange} 
                     handleImageChange = {this.handleImageChange} />
             </Wrapper>
@@ -191,6 +181,8 @@ class Container extends Component {
 export default Container;
 
 const Wrapper = styled.div`
+    width: 100%;
+    height: 100%;
     text-align: center;
 `;
 
