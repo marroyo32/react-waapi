@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Canvas from './Canvas';
 import styled from 'styled-components';
+import { ClipLoader } from 'react-spinners';
 
 class Animation extends Component {
     constructor(props) {
@@ -10,6 +11,8 @@ class Animation extends Component {
             paused: true,
             startCreate: false,
             intervalTime: 10,
+            percent: 0,
+            loading: false
         };
     };
 
@@ -32,6 +35,7 @@ class Animation extends Component {
             paused: false,
             startCreate: true,
             intervalTime: 40,
+            loading: true,
         });
     }
     
@@ -40,11 +44,14 @@ class Animation extends Component {
             if (this.state.paused === false && this.state.time < 1000) {
                 this.setState(prevState => ({ 
                     time : prevState.time + 1, 
+                    percent : this.state.time,
                 }));
             } else if (this.state.time === 1000) {
                 this.setState({
                     time: 0,
                     paused: true,
+                    loading: false,
+                    percent: 0,
                 })
             } 
         }, this.state.intervalTime);            
@@ -54,13 +61,27 @@ class Animation extends Component {
         return (
             <div style={{width: '40%', marginTop: '4rem'}}>
                 <Canvas time={this.state.time} state={this.props.state} startCreate = {this.state.startCreate} />
+                <ClipLoader
+                    css={{
+                        display: 'block',
+                        margin: '0 auto',
+                        borderColor: 'red',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '24%'
+                    }}
+                    sizeUnit={"px"}
+                    size={100}
+                    color={'#123abc'}
+                    loading={this.state.loading}
+                />
                 <Controller>
                     <Button onClick = { this.handlePause }>
                         {
                             this.__btnIcon()
                         }
                     </Button>
-                    <Range type="range" min="0" max="100" />
+                    <Range type="range" min="0" max="1000" value={this.state.percent} />
                 </Controller>
                 <CreateButton onClick={(e) => this.handleCreate(e)}>Create Movie</CreateButton>
             </div>

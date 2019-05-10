@@ -41,7 +41,6 @@ class Canvas extends Component {
     drawAnimation() {
         if(this.props.state.paused){return;}        
         const {time} = this.props;
-        console.log(`time`, time);
         const canvas = this.canvas.current;
         const ctx = canvas.getContext("2d");
         const width = canvas.width;
@@ -101,7 +100,7 @@ class Canvas extends Component {
         } else if (time === 1000) {
             ctx.translate(-velocityHorizon, -height);
         } 
-        // capture the data URL of the image
+
         if (this.props.startCreate===true) {
             let data = canvas.toDataURL("image/png");
             data = 'data=' + encodeURIComponent(data) + '&i=' + counter;
@@ -115,6 +114,10 @@ class Canvas extends Component {
             ).then(response => {
                 console.log('Post data successfully!');
                 console.log(response.data);
+                if (counter > 900 ) {
+                    const win = window.open('http://localhost:8888/save_animation.php', '_blank');
+                    win.focus();
+                }
             }).catch(error => console.log(error));
         }
     }
