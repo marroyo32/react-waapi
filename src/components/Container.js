@@ -32,48 +32,9 @@ class Container extends Component {
         this.imageSecond = React.createRef();
         this.imageThird = React.createRef();
     }
-
-    getKeyFramesFirst() {
-        return [
-            {offset: 0, margin: "0px 0px 0px -370px"},
-            {offset: 1/4, margin: "0px 0px 0px 0px"},
-            {offset: 3/4, margin: "0px 0px 0px 0px"},
-            {offset: 1, margin: "0px 0px 0px 370px"}
-        ];
-    }
-
-    getKeyFramesSecond() {
-        return [
-            {offset: 0, margin: "0px 0px 0px 0px"},
-            {offset: 1/12, margin: "-400px 0px 0px 0px"},
-            {offset: 11/12, margin: "-400px 0px 0px 0px"},
-            {offset: 1, margin: "250px 0px 0px 0px"}
-        ];
-    }
-
-    getKeyFramesThird() {
-        return [
-            {offset: 0, margin: "-2000px 0px 0px 0px"},
-            {offset: 1/5, margin: "-1200px 0px 0px 0px"},
-            {offset: 4/5, margin: "-1200px 0px 0px 0px"},
-            {offset: 1, margin: "0px 0px 0px 0px"}
-        ];
-    }
-
-    getTiming( duration ) {
-        return {
-            duration,
-            easing: 'ease-in-out',
-            delay: 0,
-            iteractions: 2,
-            direction: 'alternate',
-            fill: 'forwards',
-        };
-    }
-
+    
     handlePause = () => {        
-        this.setState(({ paused }) => ({ paused: !paused }))
-        // this.props.handlePause()
+        this.setState(({ paused }) => ({ paused: !paused }));
     }
 
     __btnIcon = () => {
@@ -137,32 +98,6 @@ class Container extends Component {
                 break;
         }
     }
-
-    // componentWillMount () {
-    //     const __this = this;
-    //     this.toDataURL('https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0', function(dataUrl) {
-    //         console.log('RESULT:', dataUrl)
-    //         __this.setState({
-    //             imageURLFirst: dataUrl,
-    //             imageURLSecond: dataUrl,
-    //             imageURLThird: dataUrl,
-    //         })
-    //     })
-    // }
-
-    // toDataURL(url, callback) {
-    //     var xhr = new XMLHttpRequest();
-    //     xhr.onload = function() {
-    //       var reader = new FileReader();
-    //       reader.onloadend = function() {
-    //         callback(reader.result);
-    //       }
-    //       reader.readAsDataURL(xhr.response);
-    //     };
-    //     xhr.open('GET', url);
-    //     xhr.responseType = 'blob';
-    //     xhr.send();
-    // }
 
     render() {   
         return(
