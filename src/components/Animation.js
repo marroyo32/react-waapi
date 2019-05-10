@@ -8,6 +8,8 @@ class Animation extends Component {
         this.state = { 
             time: 0,
             paused: true,
+            startCreate: false,
+            intervalTime: 10,
         };
     };
 
@@ -22,6 +24,16 @@ class Animation extends Component {
             return <p style={{margin: '0'}}>&#9616;&#9616;</p> 
         }
     }
+
+    handleCreate = (e) => {
+        e.preventDefault();
+        this.setState({
+            time: 0,
+            paused: false,
+            startCreate: true,
+            intervalTime: 40,
+        });
+    }
     
     componentWillMount() {        
         setInterval(() => {
@@ -35,13 +47,13 @@ class Animation extends Component {
                     paused: true,
                 })
             } 
-        }, 10);            
+        }, this.state.intervalTime);            
     };
     
     render() {
         return (
-            <div>
-                <Canvas time={this.state.time} state={this.props.state} />
+            <div style={{width: '40%', marginTop: '4rem'}}>
+                <Canvas time={this.state.time} state={this.props.state} startCreate = {this.state.startCreate} />
                 <Controller>
                     <Button onClick = { this.handlePause }>
                         {
@@ -50,7 +62,7 @@ class Animation extends Component {
                     </Button>
                     <Range type="range" min="0" max="100" />
                 </Controller>
-                <CreateButton>Create Movie</CreateButton>
+                <CreateButton onClick={(e) => this.handleCreate(e)}>Create Movie</CreateButton>
             </div>
         );
     }
@@ -60,9 +72,9 @@ export default Animation;
 
 
 const Controller = styled.div`
-    width: 26rem;
-    margin-left: 13rem;
-    display: flex;
+    width: 36rem;
+    margin-left: 9rem;
+    display: inline-block;
 `;
 
 const Range = styled.input`
@@ -101,6 +113,7 @@ const CreateButton = styled.button`
     text-align: center;
     padding: .2rem;
     margin: 1rem;
+    margin-left: 16rem;
     background-color: #fff;
     font-size: 15px;
     border-radius: 4px;
